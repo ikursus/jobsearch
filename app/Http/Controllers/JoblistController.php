@@ -34,6 +34,12 @@ class JoblistController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required',
+            'salary' => 'required|numeric'
+        ]);
+        
         $data = $request->all();
 
         return $data;
