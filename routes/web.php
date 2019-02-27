@@ -35,7 +35,9 @@ Route::get('users/create', 'UserController@create');
  Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
 
 
-
+Route::get('joblist', 'JoblistController@index');
+Route::get('joblist/add', 'JoblistController@create');
+Route::get('joblist/{id}/edit', 'JoblistController@edit');
 
 
 
