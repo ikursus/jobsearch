@@ -44,6 +44,7 @@ Route::get('joblist/add', 'JoblistController@create');
 Route::post('joblist/add', 'JoblistController@store');
 
 Route::get('joblist/{id}/edit', 'JoblistController@edit');
+Route::patch('joblist/{id}/edit', 'JoblistController@update');
 
 
 
