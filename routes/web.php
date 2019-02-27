@@ -34,9 +34,15 @@ Route::get('users/create', 'UserController@create');
  # Route untuk paparkan borang edit user sedia ada
  Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
 
-
+/*
+ * Routing untuk pengurusan joblist
+ */
 Route::get('joblist', 'JoblistController@index');
+# Route untuk paparkan borang tambah joblist
 Route::get('joblist/add', 'JoblistController@create');
+# Route untuk terima data daripada borang di joblist/add menerusi method POST
+Route::post('joblist/add', 'JoblistController@store');
+
 Route::get('joblist/{id}/edit', 'JoblistController@edit');
 
 
