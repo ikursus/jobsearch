@@ -28,37 +28,11 @@ Route::get('about-us', function () {
  * Routing untuk pengurusan users
  */
 # Route untuk paparkan senarai users`
- Route::get('users', function () {
-
-    $rekod_users = [
-        [
-            'id' => '1',
-            'nama' => 'Ali',
-            'email' => 'ali@gmail.com'
-        ],
-        [
-            'id' => '2',
-            'nama' => 'John',
-            'email' => 'john@gmail.com'
-        ],
-        [
-            'id' => '3',
-            'nama' => 'Lee',
-            'email' => 'lee@gmail.com'
-        ],
-    ];
-
-     return view('template_users/senarai_users', compact('rekod_users'));
-
- });
+ Route::get('users', 'UserController@index');
  # Route untuk paparkan borang tambah user baru
-Route::get('users/create', function () {
-    return view('template_users/tambah_user');
-});
+Route::get('users/create', 'UserController@create');
  # Route untuk paparkan borang edit user sedia ada
- Route::get('users/{id}/edit', function ($id) {
-    return view('template_users/edit_user', compact('id'));
-})->name('editUser');
+ Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
 
 
 
