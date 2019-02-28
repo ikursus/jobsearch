@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::get('contact-us', function () {
@@ -28,9 +28,11 @@ Route::get('about-us', function () {
  * Routing untuk pengurusan users
  */
 # Route untuk paparkan senarai users`
- Route::get('users', 'UserController@index');
+ Route::get('users', 'UserController@index')->name('senaraiUsers');
  # Route untuk paparkan borang tambah user baru
 Route::get('users/create', 'UserController@create');
+# Route untuk terima data dari borang tambah user baru
+Route::post('users/create', 'UserController@store');
  # Route untuk paparkan borang edit user sedia ada
  Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
 

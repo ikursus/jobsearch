@@ -23,11 +23,11 @@
             @foreach($rekod_users as $user)
 
             <tr>
-                <td>{{ $user['id'] }}</td>
-                <td>{{ $user['nama']}}</td>
-                <td>{{ $user['email']}} </td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }} </td>
                 <td>
-                    <a href="{{ route('editUser', $user['id']) }}" class="btn btn-primary">
+                    <a href="{{ route('editUser', $user->id) }}" class="btn btn-primary">
                         EDIT
                     </a>
 
