@@ -97,7 +97,8 @@ class JoblistController extends Controller
         ->where('id', '=', $id)
         ->update($data);
 
-        return redirect()->route('indexJoblist')->with('mesej_sukses', 'Rekod berjaya dikemaskini!');
+        return redirect()->route('indexJoblist')
+        ->with('mesej_sukses', 'Rekod berjaya dikemaskini!');
     }
 
     /**
@@ -108,6 +109,11 @@ class JoblistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('joblist')
+        ->where('id', '=', $id)
+        ->delete();
+
+        return redirect()->route('indexJoblist')
+        ->with('mesej_sukses', 'Rekod berjaya dihapuskan!');
     }
 }
