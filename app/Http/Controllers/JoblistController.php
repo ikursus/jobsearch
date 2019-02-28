@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Joblist;
 
 class JoblistController extends Controller
 {
@@ -14,7 +15,8 @@ class JoblistController extends Controller
      */
     public function index()
     {
-        $rekod_joblist = DB::table('joblist')->get();
+        #$rekod_joblist = DB::table('joblist')->get();
+        $rekod_joblist = Joblist::all();
 
         return view('template_joblist/senarai_joblist', compact('rekod_joblist'));
     }
@@ -43,9 +45,11 @@ class JoblistController extends Controller
             'salary' => 'required|numeric'
         ]);
         
-        $data = $request->only('title', 'description', 'salary', 'position', 'education');
+        #$data = $request->only('title', 'description', 'salary', 'position', 'education');
+        $data = $request->all();
 
-        DB::table('joblist')->insert($data);
+        #DB::table('joblist')->insert($data);
+        Joblist::create($data);
 
         return redirect()->route('indexJoblist');
     }
@@ -69,9 +73,12 @@ class JoblistController extends Controller
      */
     public function edit($id)
     {
-        $joblist = DB::table('joblist')
-        ->where('id', '=', $id)
-        ->first();
+        // $joblist = DB::table('joblist')
+        // ->where('id', '=', $id)
+        // ->first();
+
+        #$joblist = Joblist::where('id', '=', $id)->first();
+        $joblist = Joblist::find($id);
 
         return view('template_joblist/edit_joblist', compact('joblist'));
     }
@@ -91,11 +98,14 @@ class JoblistController extends Controller
             'salary' => 'required|numeric'
         ]);
         
-        $data = $request->only('title', 'description', 'salary', 'position', 'education');
+        $data = $request->all();
 
-        DB::table('joblist')
-        ->where('id', '=', $id)
-        ->update($data);
+        // DB::table('joblist')
+        // ->where('id', '=', $id)
+        // ->update($data);
+        # Joblist::where('id', '=', $id)->update($data);
+        $joblist = Joblist::find($id);
+        $joblist->update($data);
 
         return redirect()->route('indexJoblist')
         ->with('mesej_sukses', 'Rekod berjaya dikemaskini!');
@@ -109,10 +119,13 @@ class JoblistController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('joblist')
-        ->where('id', '=', $id)
-        ->delete();
-
+        // DB::table('joblist')
+        // ->where('id', '=', $id)
+        // ->delete();
+        # Joblist::where('id', '=', $id)->delete();
+        $joblist = Joblist::find($id);
+        $joblist->delete();
+        
         return redirect()->route('indexJoblist')
         ->with('mesej_sukses', 'Rekod berjaya dihapuskan!');
     }
