@@ -43,14 +43,14 @@ Route::post('users/create', 'UserController@store')->name('storeUser');
 /*
  * Routing untuk pengurusan joblist
  */
-Route::get('joblist', 'JoblistController@index');
+Route::get('joblist', 'JoblistController@index')->name('indexJoblist');
 # Route untuk paparkan borang tambah joblist
-Route::get('joblist/add', 'JoblistController@create');
+Route::get('joblist/add', 'JoblistController@create')->name('createJoblist');
 # Route untuk terima data daripada borang di joblist/add menerusi method POST
-Route::post('joblist/add', 'JoblistController@store');
-
-Route::get('joblist/{id}/edit', 'JoblistController@edit');
-Route::patch('joblist/{id}/edit', 'JoblistController@update');
+Route::post('joblist/add', 'JoblistController@store')->name('storeJoblist');
+Route::get('joblist/{id}/edit', 'JoblistController@edit')->name('editJoblist');;
+Route::patch('joblist/{id}/edit', 'JoblistController@update')->name('updateJoblist');
+Route::delete('joblist/{id}', 'JoblistController@destroy')->name('destroyJoblist');
 
 
 

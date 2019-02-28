@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class JoblistController extends Controller
 {
@@ -13,7 +14,9 @@ class JoblistController extends Controller
      */
     public function index()
     {
-        return view('template_joblist/senarai_joblist');
+        $rekod_joblist = DB::table('joblist')->get();
+
+        return view('template_joblist/senarai_joblist', compact('rekod_joblist'));
     }
 
     /**
@@ -40,9 +43,11 @@ class JoblistController extends Controller
             'salary' => 'required|numeric'
         ]);
         
-        $data = $request->all();
+        $data = $request->only('title', 'description', 'salary', 'position', 'education');
 
-        return $data;
+        DB::table('joblist')->insert($data);
+
+        return redirect()->route('indexJoblist');
     }
 
     /**
@@ -64,7 +69,11 @@ class JoblistController extends Controller
      */
     public function edit($id)
     {
-        return view('template_joblist/edit_joblist');
+        $joblist = DB::table('joblist')
+        ->where('id', '=', $id)
+        ->first();
+
+        return view('template_joblist/edit_joblist', compact('joblist'));
     }
 
     /**
@@ -76,9 +85,19 @@ class JoblistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required',
+            'salary' => 'required|numeric'
+        ]);
+        
+        $data = $request->only('title', 'description', 'salary', 'position', 'education');
 
-        return $data;
+        DB::table('joblist')
+        ->where('id', '=', $id)
+        ->update($data);
+
+        return redirect()->route('indexJoblist')->with('mesej_sukses', 'Rekod berjaya dikemaskini!');
     }
 
     /**
