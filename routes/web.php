@@ -37,6 +37,8 @@ Route::post('users/create', 'UserController@store')->name('storeUser');
  Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
  # Route untuk terima data dari borang edit user sedia ada
  Route::patch('users/{id}/edit', 'UserController@update')->name('updateUser');
+ # Route untuk delete rekod dalam table database
+ Route::delete('users/{id}', 'UserController@destroy')->name('destroyUser');
 
 /*
  * Routing untuk pengurusan joblist

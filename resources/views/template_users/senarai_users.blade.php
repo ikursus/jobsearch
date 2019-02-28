@@ -31,13 +31,17 @@
                         EDIT
                     </a>
 
-                    <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-        Delete
-      </button>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}">
+                    DELETE
+                  </button>
       
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form method="POST" action="{{ route('destroyUser', $user->id) }}">
+      @csrf
+      @method('delete')
+
+      <div class="modal fade" id="modal-delete-{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -48,14 +52,22 @@
             </div>
             <div class="modal-body">
               Adakah anda bersetuju untuk delete rekod ini?
+
+              <ul>
+                <li>ID: {{ $user->id }}</li>
+              </ul>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
             </div>
           </div>
         </div>
       </div>
+
+    </form>
+      <!-- Tutup Modal -->
+
                 </td>
             </tr>
 

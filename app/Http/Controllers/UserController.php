@@ -65,7 +65,14 @@ class UserController extends Controller
         ->update($data);
         
         return redirect()->route('indexUser');
+    }
 
+    public function destroy($id)
+    {
+        DB::table('users')
+        ->where('id', '=', $id)
+        ->delete();
 
+        return redirect()->route('indexUser');
     }
 }
