@@ -28,13 +28,15 @@ Route::get('about-us', function () {
  * Routing untuk pengurusan users
  */
 # Route untuk paparkan senarai users`
- Route::get('users', 'UserController@index')->name('senaraiUsers');
+ Route::get('users', 'UserController@index')->name('indexUser');
  # Route untuk paparkan borang tambah user baru
-Route::get('users/create', 'UserController@create');
+Route::get('users/create', 'UserController@create')->name('createUser');
 # Route untuk terima data dari borang tambah user baru
-Route::post('users/create', 'UserController@store');
+Route::post('users/create', 'UserController@store')->name('storeUser');
  # Route untuk paparkan borang edit user sedia ada
  Route::get('users/{id}/edit', 'UserController@edit')->name('editUser');
+ # Route untuk terima data dari borang edit user sedia ada
+ Route::patch('users/{id}/edit', 'UserController@update')->name('updateUser');
 
 /*
  * Routing untuk pengurusan joblist

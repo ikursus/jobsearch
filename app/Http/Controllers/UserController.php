@@ -34,10 +34,38 @@ class UserController extends Controller
 
         DB::table('users')->insert($data);
         
-        return redirect()->route('senaraiUsers');
+        return redirect()->route('indexUser');
     }
 
-    public function edit($id) {
-        return view('template_users/edit_user', compact('id'));
+    public function edit($id)
+    {
+        $user = DB::table('users')
+        ->where('id', '=', $id)
+        ->first();
+
+        return view('template_users/edit_user', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $data = $request->only('name', 'email');
+
+        if (!empty($request->input('password')))
+        {
+            $data['password'] = bcrypt($request->input('password'));
+        }
+
+        DB::table('users')
+        ->where('id', '=', $id)
+        ->update($data);
+        
+        return redirect()->route('indexUser');
+
+
     }
 }
